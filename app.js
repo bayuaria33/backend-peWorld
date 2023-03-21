@@ -5,6 +5,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 console.log("Check Dev")
+console.log("test")
 app.listen(port, () => {
     console.log(`App running on port ${port}.`);
   });
