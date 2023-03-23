@@ -27,6 +27,20 @@ const findUser = (email) => {
   );
 };
 
+const selectDataUserById = (id) => {
+  let qry = `SELECT * 
+  FROM users WHERE id='${id}'`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
+
 const createEmployer = (company_data) => {
   const { id, company_name } = company_data;
   const qry = `INSERT INTO employer(users_id,company_name) VALUES ('${id}','${company_name}')`;
@@ -42,22 +56,37 @@ const createEmployer = (company_data) => {
 };
 
 const createEmployee = (data) => {
-    const { id } = data;
-    const qry = `INSERT INTO employee(users_id) VALUES ('${id}')`;
-    return new Promise((resolve, reject) =>
-      Pool.query(qry, (err, result) => {
-        if (!err) {
-          resolve(result);
-        } else {
-          reject(err);
-        }
-      })
-    );
-  };
+  const { id } = data;
+  const qry = `INSERT INTO employee(users_id) VALUES ('${id}')`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
+
+const verifyUser = (id) => {
+  let qry = `UPDATE users SET verified = true WHERE id='${id}'`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
 
 module.exports = {
   createUser,
   findUser,
+  selectDataUserById,
+  verifyUser,
   createEmployer,
-  createEmployee
+  createEmployee,
 };
