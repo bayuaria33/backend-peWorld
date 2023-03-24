@@ -1,20 +1,23 @@
 const {selectPortoByUserId, insertPorto, updatePorto, deletePorto} = require('../model/portoModel');
+const cloudinary = require('../config/portoImages');
 
 const portoController = {
     getMyPorto: async (req, res) => {
         let id = req.payload.id;
         let response = await selectPortoByUserId(id);
-        console.log(response);
+        // console.log(response);
         if (!response) {
             return res.status(400).json({msg: "failed get my porto"});
         }
         return res.status(200).json({msg: "success get my porto", data: response.rows});
     },
     postPorto: async (req, res) => {
+        const imageUrl = await cloudinary.uploader.upload(req.file.path, {folder: 'peworld-porto'})
+        console.log(imageUrl);
         let data = {};
         data.porto_title = req.body.porto_title;
         data.porto_link = req.body.porto_link;
-        data.porto_photo = req.body.porto_photo;
+        data.porto_photo = imageUrl.secure_url;
         data.porto_type = req.body.porto_type;
         data.users_id = req.payload.id;
         let response = await insertPorto(data);
