@@ -14,7 +14,20 @@ const insertPorto = (data) => {
     VALUES ('${porto_title}', '${porto_link}', '${porto_photo}', '${porto_type}', '${users_id}', '${Newtime}')`)
 }
 
+const updatePorto = (id, data) => {
+    let {porto_title, porto_link, porto_photo, porto_type, users_id} = data
+    return Pool.query(`UPDATE portofolio SET porto_title = '${porto_title}', porto_link = '${porto_link}', porto_photo = '${porto_photo}', porto_type = '${porto_type}' 
+    WHERE id = ${id} AND users_id = '${users_id}'`);
+}
+
+const deletePorto = (id, users_id) => {
+    let Newtime = new Date().toISOString();
+    return Pool.query(`UPDATE portofolio SET deleted_at = '${Newtime}' WHERE id = ${id} AND users_id = '${users_id}'`);
+}
+
 module.exports = {
     selectPortoByUserId,
-    insertPorto
+    insertPorto,
+    updatePorto,
+    deletePorto
 }
