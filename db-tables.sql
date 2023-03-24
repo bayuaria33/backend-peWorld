@@ -18,6 +18,7 @@ CREATE TABLE employer (
     province_name VARCHAR,
     city_id VARCHAR,
     city_name VARCHAR,
+    position VARCHAR,
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id));

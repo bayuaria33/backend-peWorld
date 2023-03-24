@@ -42,8 +42,8 @@ const selectDataUserById = (id) => {
 };
 
 const createEmployer = (company_data) => {
-  const { id, company_name } = company_data;
-  const qry = `INSERT INTO employer(users_id,company_name) VALUES ('${id}','${company_name}')`;
+  const { id, company_name, position } = company_data;
+  const qry = `INSERT INTO employer(users_id,company_name,position) VALUES ('${id}','${company_name}', '${position}')`;
   return new Promise((resolve, reject) =>
     Pool.query(qry, (err, result) => {
       if (!err) {
