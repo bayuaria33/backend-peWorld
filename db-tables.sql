@@ -5,7 +5,8 @@ CREATE TABLE users (
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     role VARCHAR NOT NULL,
-    otp VARCHAR);
+    otp VARCHAR,
+    created_at TIMESTAMP);
 
 CREATE TABLE employer (
     id SERIAL PRIMARY KEY,

@@ -2,8 +2,8 @@ const Pool = require("./../config/dbconfig");
 
 const createUser = (data) => {
   const { id, name, email, password, phone, role, otp } = data;
-  const query = `INSERT INTO users(id, name, email, password,phone, role, otp) 
-    VALUES('${id}','${name}', '${email}','${password}','${phone}','${role}','${otp}')`;
+  const query = `INSERT INTO users(id, name, email, password,phone, role, otp,created_at) 
+    VALUES('${id}','${name}', '${email}','${password}','${phone}','${role}','${otp}', NOW()::timestamp)`;
   return new Promise((resolve, reject) =>
     Pool.query(query, (err, result) => {
       if (!err) {
