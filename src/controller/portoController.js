@@ -13,7 +13,7 @@ const portoController = {
     },
     postPorto: async (req, res) => {
         const imageUrl = await cloudinary.uploader.upload(req.file.path, {folder: 'peworld-porto'})
-        console.log(imageUrl);
+        // console.log(imageUrl);
         let data = {};
         data.porto_title = req.body.porto_title;
         data.porto_link = req.body.porto_link;
@@ -27,11 +27,12 @@ const portoController = {
         return res.status(201).json({msg: "success post porto"});
     },
     updatePorto: async (req, res) => {
+        const imageUrl = await cloudinary.uploader.upload(req.file.path, {folder: 'peworld-porto'})
         let id = req.params.id;
         let data = {};
         data.porto_title = req.body.porto_title;
         data.porto_link = req.body.porto_link;
-        data.porto_photo = req.body.porto_photo;
+        data.porto_photo = imageUrl.secure_url;
         data.porto_type = req.body.porto_type;
         data.users_id = req.payload.id;
         let response = await updatePorto(id, data);
