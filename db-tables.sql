@@ -64,6 +64,7 @@ CREATE TABLE experience (
 CREATE TABLE portofolio (
     id SERIAL PRIMARY KEY,
     users_id VARCHAR NOT NULL,
+    porto_title VARCHAR,
     porto_link VARCHAR,
     porto_photo VARCHAR,
     porto_type VARCHAR,
