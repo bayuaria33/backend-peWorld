@@ -20,6 +20,7 @@ CREATE TABLE employer (
     city_id VARCHAR,
     city_name VARCHAR,
     position VARCHAR,
+    company_email VARCHAR
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id));

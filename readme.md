@@ -154,6 +154,9 @@ Auth:
 Req Body Form: 
 | Key | Value |
 | :-------- | :------------------------- |
+| `name` | Nama|
+| `email` | Nama@email |
+| `phone` | 0812 |
 | `company_photo` | image jpeg/png|
 | `company_name` | PT. Maju Mundur |
 | `company_field` | Finance / IT Services / etc |

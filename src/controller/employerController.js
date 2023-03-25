@@ -5,6 +5,7 @@ const {
   updateEmployer,
 } = require("../model/employerModel");
 const cloudinary = require("../config/uploadconfig");
+const { updateUser, findUserById } = require("../model/usersModel");
 const EmployerController = {
   getAllEmployer: async (req, res) => {
     try {
@@ -119,6 +120,9 @@ const EmployerController = {
       let {
         rows: [employer],
       } = await getEmployer({ id });
+      let {
+        rows: [users],
+      } = await findUserById(id);
       if (!req.file) {
         req.body.company_photo = employer.company_photo;
       } else {
@@ -142,7 +146,9 @@ const EmployerController = {
         req.body.company_photo = imageUrl.secure_url;
       }
 
-      let data = {
+      let data_employer = {
+        company_email: req.body.company_email || employer.company_email,
+        company_name: req.body.company_name || employer.company_name,
         company_photo: req.body.company_photo || employer.company_photo,
         company_field: req.body.company_field || employer.company_field,
         company_info: req.body.company_info || employer.company_info,
@@ -151,8 +157,15 @@ const EmployerController = {
         position: req.body.position || employer.position,
       };
 
-      let result = await updateEmployer(id, data);
-      if (!result) {
+      let data_user = {
+        name: req.body.name || users.name,
+        email: req.body.email || users.email,
+        phone: req.body.phone || users.phone
+      }
+
+      let result_employer = await updateEmployer(id, data_employer);
+      let result_user = await updateUser(id,data_user)
+      if (!(result_employer && result_user)) {
         res
           .status(404)
           .json({ status: 404, message: "Update data employer failed" });
