@@ -60,6 +60,7 @@ const UsersController = {
       let company_data = {
         id,
         company_name: req.body.company_name,
+        position: req.body.position
       };
       const result = createUser(data);
       try {

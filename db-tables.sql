@@ -5,7 +5,8 @@ CREATE TABLE users (
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     role VARCHAR NOT NULL,
-    otp VARCHAR);
+    otp VARCHAR,
+    created_at TIMESTAMP);
 
 CREATE TABLE employer (
     id SERIAL PRIMARY KEY,
@@ -18,6 +19,7 @@ CREATE TABLE employer (
     province_name VARCHAR,
     city_id VARCHAR,
     city_name VARCHAR,
+    position VARCHAR,
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id));
