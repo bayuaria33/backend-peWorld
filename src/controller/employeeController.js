@@ -1,8 +1,10 @@
 const {
   getAllEmployee,
-  getDetailEmployee
+  getDetailEmployee,
+  getEmployee,
+  updateEmployee,
 } = require("../model/employeeModel");
-
+const cloudinary = require("../config/uploadconfig");
 const EmployeeController = {
   getAllEmployee: async (req, res, next) => {
     try {
@@ -29,12 +31,18 @@ const EmployeeController = {
         res.status(200).json({
           status: 200,
           message: `Employee data found`,
-          data: showEmployee.rows
+          data: showEmployee.rows,
         })
       );
     } catch (error) {
       return next(
-        res.status(404).json({ status: 404, message: 'Error getting data', data:error.message})
+        res
+          .status(404)
+          .json({
+            status: 404,
+            message: "Error getting data",
+            data: error.message,
+          })
       );
     }
   },
@@ -42,7 +50,7 @@ const EmployeeController = {
     try {
       let id = req.payload.id;
       let data = {
-        id
+        id,
       };
 
       let showEmployee = await getDetailEmployee(data);
@@ -50,7 +58,7 @@ const EmployeeController = {
         next(
           res
             .status(404)
-            .json({ status: 404, message: `Employee data not found`})
+            .json({ status: 404, message: `Employee data not found` })
         );
         return;
       }
@@ -63,7 +71,13 @@ const EmployeeController = {
       );
     } catch (error) {
       return next(
-        res.status(404).json({ status: 404, message: 'Error getting data', data:error.message})
+        res
+          .status(404)
+          .json({
+            status: 404,
+            message: "Error getting data",
+            data: error.message,
+          })
       );
     }
   },
@@ -71,7 +85,7 @@ const EmployeeController = {
     try {
       let id = req.params.id;
       let data = {
-        id
+        id,
       };
       let showEmployee = await getDetailEmployee(data);
       if (showEmployee.rows.length === 0) {
@@ -91,7 +105,88 @@ const EmployeeController = {
       );
     } catch (error) {
       return next(
-        res.status(404).json({ status: 404, message: 'Error getting data', data:error.message})
+        res
+          .status(404)
+          .json({
+            status: 404,
+            message: "Error getting data",
+            data: error.message,
+          })
+      );
+    }
+  },
+
+  updateEmployee: async (req, res, next) => {
+    try {
+      let id = req.payload.id;
+      let {
+        rows: [employee],
+      } = await getEmployee({id});
+      console.log();
+      if (!req.file) {
+        req.body.employee_photo = employee.employee_photo;
+      } else {
+        // console.log('req valid',req.isFileValid)
+        if (!req.isFileValid) {
+          return res
+            .status(404)
+            .json({
+              status: 404,
+              message: `${req.isFileValidMessage || `File type invalid`}`,
+            });
+        }
+        const imageUrl = await cloudinary.uploader.upload(req.file.path, {
+          folder: "peworld_images",
+        });
+        if (!imageUrl) {
+          next(
+            res
+              .status(404)
+              .json({
+                status: 404,
+                message: `Update data failed, failed to upload photo`,
+              })
+          );
+        }
+        req.body.employee_photo = imageUrl.secure_url;
+      }
+
+      let data = {
+        employee_photo: req.body.employee_photo || employee.employee_photo,
+        employee_job: req.body.employee_job || employee.employee_job,
+        employee_description: req.body.employee_description || employee.employee_description,
+        province_name: req.body.province_name || employee.province_name,
+        city_name: req.body.city_name || employee.city_name,
+      };
+
+
+      let result = await updateEmployee(id, data);
+      if (!result) {
+        return next(
+          res
+            .status(404)
+            .json({ status: 404, message: "Update data employee failed" })
+        );
+      }
+      let {
+        rows: [checkEmployee],
+      } = await getEmployee(id);
+      next(
+        res.status(200).json({
+          status: 200,
+          message: `Update data employee successful`,
+          data: checkEmployee,
+        })
+      );
+    } catch (error) {
+      return next(
+        res
+          .status(404)
+          .json({
+            status: 404,
+            message: "Error updating data",
+            data: error.message
+          })
       );
     }
   },

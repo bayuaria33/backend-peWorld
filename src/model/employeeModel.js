@@ -33,7 +33,58 @@ const getAllEmployee = (data) => {
       })
     );
   }
+
+  const getEmployee = (data) =>{
+    let {id} = data;
+    let qry = `SELECT * from employee where users_id = '${id}'`;
+    return new Promise((resolve, reject) =>
+      Pool.query(qry, (err, result) => {
+        if (!err) {
+          resolve(result);
+        } else {
+          reject(err);
+        }
+      })
+    );
+  }
+
+  const getEmployer = (data) =>{
+    let {id} = data;
+    let qry = `SELECT * from employer where users_id = '${id}'`;
+    return new Promise((resolve, reject) =>
+      Pool.query(qry, (err, result) => {
+        if (!err) {
+          resolve(result);
+        } else {
+          reject(err);
+        }
+      })
+    );
+  }
+
+const updateEmployee = (id, data) =>{
+  let {employee_photo, employee_job, employee_description, province_name, city_name} = data;
+  let qry = `UPDATE employee SET 
+  employee_photo='${employee_photo}',
+  employee_job='${employee_job}',
+  employee_description='${employee_description}',
+  province_name='${province_name}',
+  city_name='${city_name}'  where users_id = '${id}'`;
+  console.log(qry)
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+}
 module.exports = {
 getAllEmployee,
-getDetailEmployee
+getDetailEmployee,
+getEmployee,
+getEmployer,
+updateEmployee
 }
