@@ -58,8 +58,10 @@ CREATE TABLE experience (
     company_name VARCHAR NOT NULL,
     experience_description VARCHAR,
     position VARCHAR,
-    work_start_date TIMESTAMP,
-    work_end_date TIMESTAMP,
+    work_start_date VARCHAR,
+    work_end_date VARCHAR,
+    created_at TIMESTAMP,
+    deleted_at TIMESTAMP
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id)
