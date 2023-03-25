@@ -24,14 +24,13 @@ const EmployeeController = {
       data.offset = (data.page - 1) * data.limit;
       let showEmployee = await getAllEmployee(data);
       if (showEmployee.rows.length === 0) {
-        next(
+        return next(
           res
             .status(404)
             .json({ status: 404, message: `Employee data not found` })
         );
-        return;
       }
-      next(
+      return next(
         res.status(200).json({
           status: 200,
           message: `Employee data found`,
@@ -59,14 +58,13 @@ const EmployeeController = {
 
       let showEmployee = await getDetailEmployee(data);
       if (showEmployee.rows.length === 0) {
-        next(
+        return next(
           res
             .status(404)
             .json({ status: 404, message: `Employee data not found` })
         );
-        return;
       }
-      next(
+      return next(
         res.status(200).json({
           status: 200,
           message: `Employee data found`,
@@ -93,14 +91,13 @@ const EmployeeController = {
       };
       let showEmployee = await getDetailEmployee(data);
       if (showEmployee.rows.length === 0) {
-        next(
+       return next(
           res
             .status(404)
             .json({ status: 404, message: `Employee data not found` })
         );
-        return;
       }
-      next(
+      return next(
         res.status(200).json({
           status: 200,
           message: `Employee data found`,
@@ -147,7 +144,7 @@ const EmployeeController = {
           folder: "peworld_images",
         });
         if (!imageUrl) {
-          next(
+          return next(
             res
               .status(404)
               .json({
@@ -187,7 +184,7 @@ const EmployeeController = {
       let {
         rows: [checkEmployee],
       } = await getEmployee(id);
-      next(
+      return next(
         res.status(200).json({
           status: 200,
           message: `Update data employee successful`,
