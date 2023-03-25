@@ -21,20 +21,19 @@ const EmployerController = {
       data.offset = (data.page - 1) * data.limit;
       let showEmployer = await getAllEmployer(data);
       if (showEmployer.rows.length === 0) {
-        res
+        return res
           .status(404)
           .json({ status: 404, message: `Employer data not found` });
-
-        return;
+        
       }
 
-      res.status(200).json({
+      return res.status(200).json({
         status: 200,
         message: `Employer data found`,
         data: showEmployer.rows,
       });
     } catch (error) {
-      res.status(404).json({
+      return res.status(404).json({
         status: 404,
         message: "Error getting data",
         data: error.message,
@@ -50,20 +49,18 @@ const EmployerController = {
 
       let showEmployer = await getDetailEmployer(data);
       if (showEmployer.rows.length === 0) {
-        res
+        return res
           .status(404)
           .json({ status: 404, message: `Employer data not found` });
-
-        return;
       }
 
-      res.status(200).json({
+      return res.status(200).json({
         status: 200,
         message: `Employer data found`,
         data: showEmployer.rows,
       });
     } catch (error) {
-      res.status(404).json({
+      return res.status(404).json({
         status: 404,
         message: "Error getting data",
         data: error.message,
@@ -79,14 +76,14 @@ const EmployerController = {
       try {
         let showEmployer = await getDetailEmployer(data);
         if (showEmployer.rows.length === 0) {
-          next(
+          return next(
             res
               .status(404)
               .json({ status: 404, message: `Employer data not found` })
           );
-          return;
         }
-        next(
+
+        return next(
           res.status(200).json({
             status: 200,
             message: `Employee data found`,
@@ -114,7 +111,6 @@ const EmployerController = {
   },
 
   updateEmployer: async (req, res, next) => {
-      console.log(`Test`);
     try {
       let id = req.payload.id;
       let {
@@ -136,7 +132,7 @@ const EmployerController = {
           folder: "peworld_images",
         });
         if (!imageUrl) {
-          next(
+          return next(
             res.status(404).json({
               status: 404,
               message: `Update data failed, failed to upload photo`,
@@ -166,15 +162,14 @@ const EmployerController = {
       let result_employer = await updateEmployer(id, data_employer);
       let result_user = await updateUser(id,data_user)
       if (!(result_employer && result_user)) {
-        res
+        return res
           .status(404)
           .json({ status: 404, message: "Update data employer failed" });
-        return;
       }
       let {
         rows: [checkEmployer],
       } = await getEmployer(id);
-      res.status(200).json({
+      return res.status(200).json({
         status: 200,
         message: `Update data employer successful`,
         data: checkEmployer,

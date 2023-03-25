@@ -107,6 +107,9 @@ Req Body Form:
 | `employee_description` | Lorem |
 | `province_name` | Jawa Tengah |
 | `city_name` | Purwokerto |
+| `linkedin` | linkedin.com/ |
+| `github` | github.com/ |
+| `instagram` | @instagram |
 
 ### Get all Employer
 
