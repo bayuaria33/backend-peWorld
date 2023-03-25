@@ -27,6 +27,19 @@ const findUser = (email) => {
   );
 };
 
+const findUserById = (id) => {
+  let qry = `SELECT * FROM users WHERE id='${id}'`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+};
+
 const selectDataUserById = (id) => {
   let qry = `SELECT * 
   FROM users WHERE id='${id}'`;
@@ -82,11 +95,27 @@ const verifyUser = (id) => {
   );
 };
 
+const updateUser = (id, data_users) =>{
+  const {name, email, phone} = data_users
+  let qry = `UPDATE users SET name='${name}', email='${email}',phone='${phone}' WHERE id='${id}'`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+}
+
 module.exports = {
   createUser,
   findUser,
+  findUserById,
   selectDataUserById,
   verifyUser,
   createEmployer,
   createEmployee,
+  updateUser
 };

@@ -20,6 +20,7 @@ CREATE TABLE employer (
     city_id VARCHAR,
     city_name VARCHAR,
     position VARCHAR,
+    company_email VARCHAR
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id));
@@ -34,6 +35,9 @@ CREATE TABLE employee (
     province_name VARCHAR,
     city_id VARCHAR,
     city_name VARCHAR,
+    linkedin VARCHAR,
+    github VARCHAR,
+    instagram VARCHAR
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id)
@@ -64,6 +68,7 @@ CREATE TABLE experience (
 CREATE TABLE portofolio (
     id SERIAL PRIMARY KEY,
     users_id VARCHAR NOT NULL,
+    porto_title VARCHAR,
     porto_link VARCHAR,
     porto_photo VARCHAR,
     porto_type VARCHAR,
