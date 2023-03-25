@@ -221,7 +221,67 @@ Auth:
 | `bearer token` |**Required**. Login accessToken |
 
 
+### Get My Experiences
 
+```http
+  GET /exp/myexp
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
 
+### Get Experience By Id
+```http
+  GET /exp/:id
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
 
+### Insert Experience
 
+```http
+  POST /exp/
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `position` | **Required**. Engineer |
+| `company_name` | **Required**. Tokopedia |
+| `experience_description` | **Required**. Lorem |
+| `work_start_date` | **Required**. month year |
+| `work_end_date` | **Required**. month year |
+
+### Update Experience
+```http
+  PUT /exp/:id
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `position` | Engineer |
+| `company_name` | Tokopedia |
+| `experience_description` | Lorem |
+| `work_start_date` | month year |
+| `work_end_date` | month year |
+
+### Delete Experience
+```http
+  DELETE /exp/:id
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
