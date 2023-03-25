@@ -99,6 +99,9 @@ Auth:
 Req Body Form: 
 | Key | Value |
 | :-------- | :------------------------- |
+| `name` | Nama|
+| `email` | Nama@email |
+| `phone` | 0812 |
 | `employee_photo` | image jpeg/png|
 | `employee_job` | Web Dev, HR, Manager |
 | `employee_description` | Lorem |

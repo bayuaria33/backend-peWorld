@@ -34,6 +34,9 @@ CREATE TABLE employee (
     province_name VARCHAR,
     city_id VARCHAR,
     city_name VARCHAR,
+    linkedin VARCHAR,
+    github VARCHAR,
+    instagram VARCHAR
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id)

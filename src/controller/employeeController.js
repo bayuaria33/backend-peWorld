@@ -4,6 +4,10 @@ const {
   getEmployee,
   updateEmployee,
 } = require("../model/employeeModel");
+const{
+findUserById,
+updateUser
+} = require("../model/usersModel")
 const cloudinary = require("../config/uploadconfig");
 const EmployeeController = {
   getAllEmployee: async (req, res, next) => {
@@ -122,7 +126,11 @@ const EmployeeController = {
       let {
         rows: [employee],
       } = await getEmployee({id});
-      console.log();
+      
+      let {
+        rows: [users],
+      } = await findUserById(id);
+
       if (!req.file) {
         req.body.employee_photo = employee.employee_photo;
       } else {
@@ -151,17 +159,25 @@ const EmployeeController = {
         req.body.employee_photo = imageUrl.secure_url;
       }
 
-      let data = {
+      let data_employee = {
         employee_photo: req.body.employee_photo || employee.employee_photo,
         employee_job: req.body.employee_job || employee.employee_job,
         employee_description: req.body.employee_description || employee.employee_description,
         province_name: req.body.province_name || employee.province_name,
         city_name: req.body.city_name || employee.city_name,
+        github: req.body.github || employee.github,
+        linkedin: req.body.linkedin || employee.linkedin,
+        instagram: req.body.instagram || employee.instagram
       };
 
-
-      let result = await updateEmployee(id, data);
-      if (!result) {
+      let data_user = {
+        name: req.body.name || users.name,
+        email: req.body.email || users.email,
+        phone: req.body.phone || users.phone
+      }
+      let result_user = await updateUser(id, data_user);
+      let result_employee = await updateEmployee(id, data_employee);
+      if (!(result_employee && result_user)) {
         return next(
           res
             .status(404)
