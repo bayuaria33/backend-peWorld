@@ -10,8 +10,8 @@ const {
 } = require("../controller/employerController");
 
 router.get("/all", getAllEmployer);
-router.get("/:id", protect, getProfileEmployer);
-router.get("/my-profile", protect, getDetailEmployer);
+router.get("/my-profile", protect, getProfileEmployer);
+router.get("/:id", getDetailEmployer);
 router.put(
   "/update-profile",
   protect,
