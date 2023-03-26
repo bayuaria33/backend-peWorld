@@ -288,3 +288,58 @@ Auth:
 |Key |Value                |
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
+
+### Get My skills
+```http
+  GET /skill/myskill
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+### Get skill by Id
+```http
+  GET /skill/:id
+```
+
+### Insert skill
+
+```http
+  POST /skill
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `skills` | **Required**. "Javascript, HTML, CSS" |
+
+
+### Update skill
+
+```http
+  PUT /skill/:id
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `skills` | **Required**. "Javascript, HTML, CSS" |
+
+### Delete skill
+
+```http
+  DELETE /skill/:id
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
