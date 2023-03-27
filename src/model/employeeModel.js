@@ -1,10 +1,11 @@
 const Pool = require("./../config/dbconfig");
 const getAllEmployee = (data) => {
     let { searchBy, search, sortBy, sort, limit, offset } = data;
-    let qry = `SELECT users.id, users.name, users.email, users.phone, employee.employee_photo as photo, employee.employee_job as job, employee.employee_description as description, employee.province_name as province, employee.city_name as city, employee.github as github, employee.linkedin as linkedin, employee.instagram as instagram
+    let qry = `SELECT users.id, users.name, users.email, users.phone, employee.employee_photo as photo, employee.employee_job as job, employee.employee_description as description, employee.province_name as province, employee.city_name as city, employee.github as github, employee.linkedin as linkedin, employee.instagram as instagram, skill.skills
     FROM users
     JOIN employee ON users.id = employee.users_id
-    WHERE users.role = 'employee' AND users.${searchBy} ILIKE '%${search}%' ORDER BY ${sortBy} ${sort} 
+    JOIN skill ON users.id = skill.users_id
+    WHERE users.role = 'employee' AND users.${searchBy} ILIKE '%${search}%' ORDER BY users.${sortBy} ${sort} 
     LIMIT ${limit} OFFSET ${offset}`;
     return new Promise((resolve, reject) =>
       Pool.query(qry, (err, result) => {
