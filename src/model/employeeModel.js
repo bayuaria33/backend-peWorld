@@ -19,9 +19,10 @@ const getAllEmployee = (data) => {
   
   const getDetailEmployee = (data) =>{
     let {id} = data;
-    let qry = `SELECT users.id, users.name, users.email, users.phone, employee.employee_photo as photo, employee.employee_job as job, employee.employee_description as description, employee.province_name as province, employee.city_name as city, employee.github as github, employee.linkedin as linkedin, employee.instagram as instagram
+    let qry = `SELECT users.id, users.name, users.email, users.phone, employee.employee_photo as photo, employee.employee_job as job, employee.employee_description as description, employee.province_name as province, employee.city_name as city, employee.github as github, employee.linkedin as linkedin, employee.instagram as instagram, skill.skills
     FROM users
     JOIN employee ON users.id = employee.users_id
+    JOIN skill ON users.id = skill.users_id
     WHERE users.role = 'employee' AND users.id = '${id}' `;
     return new Promise((resolve, reject) =>
       Pool.query(qry, (err, result) => {
