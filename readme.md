@@ -5,6 +5,10 @@ Employee = Pekerja / Worker
 
 Employer = Perekrut / Company
 
+
+
+
+---
 ### Register Employee
 ```http
   POST /users/register/employee
@@ -18,6 +22,10 @@ Req Body Form:
 | `confirm` | **Required**. confirm |
 | `phone` | **Required**. phone |
 
+
+
+
+---
 ### Register Employer
 ```http
   POST /users/register/employer
@@ -33,6 +41,10 @@ Req Body Req Body Form:
 | `company_name` | **Required**. company_name |
 | `position` | **Required**. position |
 
+
+
+
+---
 ### Login
 ```http
   POST /users/login
@@ -43,6 +55,10 @@ Req Body Form:
 | `email` | **Required**. email |
 | `password` | **Required**. password |
 
+
+
+
+---
 ### Verify User
 ```http
   POST /users/verify
@@ -53,6 +69,10 @@ Req Body Form:
 | `email` | **Required**. email |
 | `otp` | **Required**. otp |
 
+
+
+
+---
 ### Get all Employee
 
 ```http
@@ -67,6 +87,10 @@ Query Params:
 | `sort`| sort query |asc
 
 
+
+
+
+---
 ### Get Employee Profile
 
 ```http
@@ -77,6 +101,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Get Employee Detail by Id
 
 ```http
@@ -87,6 +115,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Update Employee
 ```http
   PUT /employee/update-profile
@@ -111,6 +143,10 @@ Req Body Form:
 | `github` | github.com/ |
 | `instagram` | @instagram |
 
+
+
+
+---
 ### Get all Employer
 
 ```http
@@ -125,6 +161,10 @@ Query Params:
 | `sort`| sort query |asc
 
 
+
+
+
+---
 ### Get Employer Profile
 
 ```http
@@ -135,6 +175,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Get Employer Detail by Id
 
 ```http
@@ -145,6 +189,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Update Employer
 ```http
   PUT /employer/update-profile
@@ -168,6 +216,10 @@ Req Body Form:
 | `province_name` | Jawa Tengah |
 | `city_name` | Purwokerto |
 
+
+
+
+---
 ### Get My Portofolio
 
 ```http
@@ -178,6 +230,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Insert Portofolio
 
 ```http
@@ -196,6 +252,10 @@ Req Body Form:
 | `porto_photo` | **Required**. image png / jpg |
 | `porto_type` | **Required**. Website |
 
+
+
+
+---
 ### Update Portofolio
 
 ```http
@@ -214,6 +274,10 @@ Req Body Form:
 | `porto_photo` |  image png / jpg |
 | `porto_type` |  Website |
 
+
+
+
+---
 ### Delete Portofolio
 ```http
   DELETE /porto/:id
@@ -224,6 +288,10 @@ Auth:
 | `bearer token` |**Required**. Login accessToken |
 
 
+
+
+
+---
 ### Get My Experiences
 
 ```http
@@ -234,6 +302,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Get Experience By Id
 ```http
   GET /exp/:id
@@ -243,6 +315,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Insert Experience
 
 ```http
@@ -262,6 +338,10 @@ Req Body Form:
 | `work_start_date` | **Required**. month year |
 | `work_end_date` | **Required**. month year |
 
+
+
+
+---
 ### Update Experience
 ```http
   PUT /exp/:id
@@ -280,6 +360,10 @@ Req Body Form:
 | `work_start_date` | month year |
 | `work_end_date` | month year |
 
+
+
+
+---
 ### Delete Experience
 ```http
   DELETE /exp/:id
@@ -289,6 +373,10 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
+
+
+
+---
 ### Get My skills
 ```http
   GET /skill/myskill
@@ -298,11 +386,19 @@ Auth:
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
 
-### Get skill by Id
+
+
+
+---
+### Get skill by skill Id
 ```http
   GET /skill/:id
 ```
 
+
+
+
+---
 ### Insert skill
 
 ```http
@@ -319,6 +415,10 @@ Req Body Form:
 | `skills` | **Required**. "Javascript, HTML, CSS" |
 
 
+
+
+
+---
 ### Update skill
 
 ```http
@@ -334,10 +434,88 @@ Req Body Form:
 | :-------- |:------------------------- |
 | `skills` | **Required**. "Javascript, HTML, CSS" |
 
+
+
+
+---
 ### Delete skill
 
 ```http
   DELETE /skill/:id
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+
+
+
+
+---
+### Insert Hire (Employer only)
+
+```http
+  POST /hire/:id
+```
+
+( :id = id employee)
+
+
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `position` | **Required**. "Fulltime Backend Developer" |
+| `hire_description` | **Required**. "Membuat fitur dan maintenance untuk API dan posisi remote" |
+| `chat` | **Required**. "Selamat siang apakah anda tertarik untuk menjadi developer kami?" |
+
+
+
+
+---
+### Insert Message (Employer & Employee)
+```http
+  POST /hire/messages/:hire_id
+```
+
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `receiver_id` | **Required**. "id lawan bicara" |
+| `chat` | **Required**. "Baiklah akan saya infokan ke tim saya terlebih dahulu" |
+
+
+
+
+
+
+---
+### Get list of hire conversations (Employer)
+```http
+  GET /hire/myhire
+```
+Auth:
+|Key |Value                |
+| :-------- |:------------------------- |
+| `bearer token` |**Required**. Login accessToken |
+
+
+
+
+---
+### Get list of hire conversations (Employee)
+```http
+  GET /hire/mymsg
 ```
 Auth:
 |Key |Value                |

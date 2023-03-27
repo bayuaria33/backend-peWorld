@@ -81,12 +81,29 @@ CREATE TABLE portofolio (
 	  REFERENCES users(id)
     );
 
-    CREATE TABLE message (
-    id SERIAL PRIMARY KEY,
+    CREATE TABLE hire (
+    id VARCHAR primary key,
     employee_id VARCHAR,
-    company_id VARCHAR,
-    message_detail VARCHAR,
+    employer_id VARCHAR,
+    hire_description VARCHAR,
     position VARCHAR,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
     );
+
+    CREATE TABLE message (
+      id SERIAL PRIMARY KEY,
+      hire_id VARCHAR,
+      receiver_id VARCHAR,
+      sender_id VARCHAR,
+      chat TEXT,
+      created_at TIMESTAMP
+    );
+
+  SELECT message.chat, message.hire_id, message.receiver_id, message.sender_id, 
+  sender.name AS sender_name,
+  receiver.name AS receiver_name
+  FROM message
+  JOIN users AS sender ON message.sender_id = sender.id
+  JOIN users AS receiver ON message.receiver_id = receiver.id
+  WHERE hire_id = '4955a95a-f129-42c1-831d-9ae5b4e6d00b' ORDER BY message.created_at ASC;
