@@ -234,6 +234,13 @@ Auth:
 
 
 ---
+### Get Portofolio by Portofolio Id
+
+```http
+  GET /porto/id
+```
+
+---
 ### Insert Portofolio
 
 ```http
