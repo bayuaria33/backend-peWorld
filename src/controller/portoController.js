@@ -11,6 +11,19 @@ const portoController = {
         }
         return res.status(200).json({msg: "success get my porto", data: response.rows});
     },
+    getUserPorto: async (req, res) => {
+        try {          
+            let id = req.params.id;
+            let response = await selectPortoByUserId(id)
+            // console.log(response);
+            if (response.rows.length === 0) {
+                return res.status(400).json({msg: `Failed getting porto of user ${id} , doesn't exist`});
+            }
+            return res.status(200).json({msg: `Success get porto of user ${id}`, data: response.rows});
+        } catch (error) {
+            return res.status(400).json({msg: error.message, data: error.data});
+        }
+    },
     getPortoById: async (req, res) => {
         try {          
             let id = req.params.id;
