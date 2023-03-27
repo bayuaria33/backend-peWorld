@@ -1,10 +1,19 @@
-const {selectSkillByUserId, insertSkill, updateSkill, deleteSkill} = require('../model/skillModel');
+const {selectSkillByUserId, insertSkill, updateSkill, deleteSkill, selectSkillBySkillId} = require('../model/skillModel');
 
 
 const skillController = {
     getMySkill: async (req, res) => {
         let id = req.payload.id;
         let response = await selectSkillByUserId(id);
+        // console.log(response);
+        if (!response) {
+            return res.status(400).json({msg: "failed get my skill"});
+        }
+        return res.status(200).json({msg: "success get my skill", data: response.rows});
+    },
+    getSkillbySkillId: async (req, res) => {
+        let id = req.params.id;
+        let response = await selectSkillBySkillId(id);
         // console.log(response);
         if (!response) {
             return res.status(400).json({msg: "failed get my skill"});
