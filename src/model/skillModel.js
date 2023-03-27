@@ -7,6 +7,13 @@ const selectSkillByUserId = (id) => {
 	WHERE skill.deleted_at IS NULL AND skill.users_id = '${id}'`);
 }
 
+const selectSkillBySkillId = (id) => {
+    return Pool.query(`SELECT skill.id, skill.skills, users.name AS by_users, TO_CHAR(skill.created_at, 'DD-MM-YYYY HH24:MI:SS') as post_time
+	FROM skill
+	JOIN users ON skill.users_id = users.id
+	WHERE skill.deleted_at IS NULL AND skill.id = '${id}'`);
+}
+
 const insertSkill = (data) => {
     let {skills, users_id} = data
     let Newtime = new Date().toISOString();
@@ -27,6 +34,7 @@ const deleteSkill = (id, users_id) => {
 
 module.exports = {
     selectSkillByUserId,
+    selectSkillBySkillId,
     insertSkill,
     updateSkill,
     deleteSkill
