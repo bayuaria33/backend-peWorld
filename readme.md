@@ -234,6 +234,21 @@ Auth:
 
 
 ---
+### Get Portofolio by Portofolio Id
+
+```http
+  GET /porto/:id
+```
+
+---
+
+### Get Portofolio by User Id
+
+```http
+  GET /porto/user/:id
+```
+
+---
 ### Insert Portofolio
 
 ```http
@@ -314,6 +329,16 @@ Auth:
 |Key |Value                |
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
+
+
+
+
+---
+### Get Experiences By User Id
+
+```http
+  GET /exp/user/:id
+```
 
 
 

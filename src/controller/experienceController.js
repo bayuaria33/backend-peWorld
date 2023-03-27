@@ -11,19 +11,29 @@ const ExperienceController = {
     let id = req.payload.id;
     let response = await getUserExperience(id);
     // console.log(response);
-    if (!response) {
+    if (response.rows.length === 0) {
       return res.status(400).json({ msg: "Failed to get experience" });
     }
     return res
       .status(200)
       .json({ msg: "Success get my experience", data: response.rows });
   },
-
+  getUserExperience: async (req, res) => {
+    let id = req.params.id;
+    let response = await getUserExperience(id);
+    // console.log(response);
+    if (response.rows.length === 0) {
+      return res.status(400).json({ msg: `Failed to get experience, exp user ${id} doesn't exist` });
+    }
+    return res
+      .status(200)
+      .json({ msg: `Success get user ${id} experience`, data: response.rows });
+  },
   getExperienceById: async (req, res) => {
     let id = req.params.id;
     let response = await getExperienceById(id);
     // console.log(response);
-    if (!response) {
+    if (response.rows.length === 0) {
       return res.status(400).json({ msg: "Failed to get experience" });
     }
     return res
@@ -44,7 +54,7 @@ const ExperienceController = {
         position: req.body.position,
       };
       let response = await insertExperience(data);
-      if (!response) {
+      if (response.rows.length === 0) {
         return res.status(401).json({ msg: "Failed to insert experience" });
       }
       return res.status(201).json({ msg: "Insert Experience successful" });
@@ -70,7 +80,7 @@ const ExperienceController = {
       };
       console.log(data);
       let response = await updateExperience(data, id);
-      if (!response) {
+      if (response.rows.length === 0) {
         return res.status(401).json({ msg: "Update experience failed" });
       }
       return res.status(201).json({ msg: "Update experience successful" });
@@ -94,7 +104,7 @@ const ExperienceController = {
       }
 
       let response = await deleteExperience(id);
-      if (!response) {
+      if (response.rows.length === 0) {
         return res.status(400).json({ msg: "Delete experience failed" });
       }
       return res.status(200).json({ msg: "Delete experience successful" });
