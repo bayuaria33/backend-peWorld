@@ -109,6 +109,34 @@ const updateUser = (id, data_users) =>{
   );
 }
 
+const changePassword = (data) =>{
+  const {email, password} = data
+  let qry = `UPDATE users SET password = '${password}' WHERE email='${email}'`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+}
+
+const checkOTP = (data) =>{
+  const {email, otp} = data
+  let qry = `SELECT * FROM users WHERE email='${email}' AND otp = '${otp}'`;
+  return new Promise((resolve, reject) =>
+    Pool.query(qry, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    })
+  );
+}
+
 module.exports = {
   createUser,
   findUser,
@@ -117,5 +145,7 @@ module.exports = {
   verifyUser,
   createEmployer,
   createEmployee,
-  updateUser
+  updateUser,
+  changePassword,
+  checkOTP
 };
