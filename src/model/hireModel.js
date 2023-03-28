@@ -36,10 +36,12 @@ const insertMessage = (data) =>{
 const getHirebyEmployer = (employer_id) =>{
   let qry = `SELECT hire.id, hire.hire_description, hire.position, hire.employee_id, hire.employer_id, 
   employee.name AS Employee_name,
-  employer.name AS Employer_name
+  employer.name AS Employer_name,
+  e.employee_photo AS employee_photo
   FROM hire
   JOIN users AS employee ON hire.employee_id = employee.id
   JOIN users AS employer ON hire.employer_id = employer.id
+  JOIN employee AS e ON hire.employee_id = e.users_id
   WHERE employer_id = '${employer_id}';`;
   console.log(qry);
   return new Promise((resolve, reject) =>
@@ -56,10 +58,12 @@ const getHirebyEmployer = (employer_id) =>{
 const getHirebyEmployee = (employee_id) =>{
   let qry = `SELECT hire.id, hire.hire_description, hire.position, hire.employee_id, hire.employer_id, 
   employee.name AS Employee_name,
-  employer.name AS Employer_name
+  employer.name AS Employer_name,
+  e.company_photo AS employer_photo
   FROM hire
   JOIN users AS employee ON hire.employee_id = employee.id
   JOIN users AS employer ON hire.employer_id = employer.id
+  JOIN employer AS e ON hire.employer_id = e.users_id
   WHERE employee_id = '${employee_id}';`;
   // console.log(qry);
   return new Promise((resolve, reject) =>
