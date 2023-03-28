@@ -76,10 +76,13 @@ const getHirebyEmployee = (employee_id) =>{
 const getMessageByHire = (hire_id) =>{
   let qry = `SELECT message.chat, message.hire_id, message.receiver_id, message.sender_id, 
   sender.name AS sender_name,
-  receiver.name AS receiver_name
+  receiver.name AS receiver_name,
+  hire.position AS hire_position,
+  hire.hire_description AS hire_description
   FROM message
   JOIN users AS sender ON message.sender_id = sender.id
   JOIN users AS receiver ON message.receiver_id = receiver.id
+  JOIN hire AS hire ON message.hire_id = hire.id
   WHERE hire_id = '${hire_id}' ORDER BY message.created_at ASC`;
   // console.log(qry);
   return new Promise((resolve, reject) =>
