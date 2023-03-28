@@ -107,3 +107,22 @@ CREATE TABLE portofolio (
   JOIN users AS sender ON message.sender_id = sender.id
   JOIN users AS receiver ON message.receiver_id = receiver.id
   WHERE hire_id = '4955a95a-f129-42c1-831d-9ae5b4e6d00b' ORDER BY message.created_at ASC;
+
+  SELECT count(*) FROM users WHERE role = 'employee' LIMIT 100 OFFSET 0;
+
+  SELECT users.id, users.name, users.email, users.phone, employee.employee_photo as photo, employee.employee_job as job, employee.employee_description as description, employee.province_name as province, employee.city_name as city, employee.github as github, employee.linkedin as linkedin, employee.instagram as instagram, skill.skills
+    FROM users
+    JOIN employee ON users.id = employee.users_id
+    JOIN skill ON users.id = skill.users_id
+    WHERE users.role = 'employee' AND users.id = '8ae318c6-007f-4499-bb14-0e3a87c0e1a4';
+
+    SELECT * FROM users WHERE users.id = '8ae318c6-007f-4499-bb14-0e3a87c0e1a4' AND users.role = 'employee';
+
+    ALTER TABLE ONLY employee 
+      ALTER COLUMN employee_job SET DEFAULT '',
+      ALTER COLUMN employee_description SET DEFAULT '',
+      ALTER COLUMN province_name SET DEFAULT '',
+      ALTER COLUMN city_name SET DEFAULT '',
+      ALTER COLUMN github SET DEFAULT '',
+      ALTER COLUMN linkedin SET DEFAULT '',
+      ALTER COLUMN instagram SET DEFAULT '';

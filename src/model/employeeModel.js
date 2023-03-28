@@ -86,10 +86,16 @@ const updateEmployee = (id, data) =>{
     })
   );
 }
+
+const getCountEmployee = () => {
+  let qry = `SELECT count(*) FROM users WHERE role = 'employee' AND deleted_at IS NULL LIMIT 100 OFFSET 0`;
+  return Pool.query(qry);
+};
 module.exports = {
 getAllEmployee,
 getDetailEmployee,
 getEmployee,
 getEmployer,
-updateEmployee
+updateEmployee,
+getCountEmployee
 }
