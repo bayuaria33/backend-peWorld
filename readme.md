@@ -546,3 +546,54 @@ Auth:
 |Key |Value                |
 | :-------- |:------------------------- |
 | `bearer token` |**Required**. Login accessToken |
+
+---
+
+### Get user OTP by Email
+```http
+  POST /users/otp
+```
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `email` | **Required**. email |
+
+
+
+
+
+
+---
+### Get confirm user OTP
+```http
+  POST /users/otp/confirm
+```
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `otp` | **Required**. otp |
+| `email` | **Required**. email |
+
+
+
+
+
+
+---
+### Reset user password 
+```http
+  POST /users/resetPassword
+```
+Req Body Form: 
+| Key | Value |
+| :-------- |:------------------------- |
+| `email` | **Required**. email |
+| `password` | **Required**. password |
+| `confirm` | **Required**. confirm password |
+
+
+
+
+
+
+---
