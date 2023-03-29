@@ -3,6 +3,7 @@ const {
   getDetailEmployee,
   getEmployee,
   updateEmployee,
+  getCountEmployee,
 } = require("../model/employeeModel");
 const{
 findUserById,
@@ -201,6 +202,17 @@ const EmployeeController = {
             data: error.message
           })
       );
+    }
+  },
+
+  countEmployee: async (req, res) => {
+    try {
+      let {
+        rows: [data],
+      } = await getCountEmployee()
+      return res.status(200).json({msg: "success get employee count: ", data: data.count});
+    } catch (error) {
+      return res.status(400).json({msg: error.message});
     }
   },
 };

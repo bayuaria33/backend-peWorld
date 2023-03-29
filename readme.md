@@ -142,7 +142,16 @@ Req Body Form:
 | `linkedin` | linkedin.com/ |
 | `github` | github.com/ |
 | `instagram` | @instagram |
+---
+### Get Employee count
+```http
+  GET /employee/count/employee
+```
 
+
+
+
+---
 
 
 
