@@ -5,7 +5,8 @@ CREATE TABLE users (
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     role VARCHAR NOT NULL,
-    otp VARCHAR);
+    otp VARCHAR,
+    created_at TIMESTAMP);
 
 CREATE TABLE employer (
     id SERIAL PRIMARY KEY,
@@ -18,6 +19,8 @@ CREATE TABLE employer (
     province_name VARCHAR,
     city_id VARCHAR,
     city_name VARCHAR,
+    position VARCHAR,
+    company_email VARCHAR
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id));
@@ -32,6 +35,9 @@ CREATE TABLE employee (
     province_name VARCHAR,
     city_id VARCHAR,
     city_name VARCHAR,
+    linkedin VARCHAR,
+    github VARCHAR,
+    instagram VARCHAR
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id)
@@ -52,8 +58,10 @@ CREATE TABLE experience (
     company_name VARCHAR NOT NULL,
     experience_description VARCHAR,
     position VARCHAR,
-    work_start_date TIMESTAMP,
-    work_end_date TIMESTAMP,
+    work_start_date VARCHAR,
+    work_end_date VARCHAR,
+    created_at TIMESTAMP,
+    deleted_at TIMESTAMP
     CONSTRAINT fk_users
       FOREIGN KEY(users_id) 
 	  REFERENCES users(id)
@@ -62,6 +70,7 @@ CREATE TABLE experience (
 CREATE TABLE portofolio (
     id SERIAL PRIMARY KEY,
     users_id VARCHAR NOT NULL,
+    porto_title VARCHAR,
     porto_link VARCHAR,
     porto_photo VARCHAR,
     porto_type VARCHAR,
@@ -72,12 +81,21 @@ CREATE TABLE portofolio (
 	  REFERENCES users(id)
     );
 
-    CREATE TABLE message (
-    id SERIAL PRIMARY KEY,
+    CREATE TABLE hire (
+    id VARCHAR primary key,
     employee_id VARCHAR,
-    company_id VARCHAR,
-    message_detail VARCHAR,
+    employer_id VARCHAR,
+    hire_description VARCHAR,
     position VARCHAR,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
+    );
+
+    CREATE TABLE message (
+      id SERIAL PRIMARY KEY,
+      hire_id VARCHAR,
+      receiver_id VARCHAR,
+      sender_id VARCHAR,
+      chat TEXT,
+      created_at TIMESTAMP
     );
