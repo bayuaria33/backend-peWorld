@@ -47,7 +47,7 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run dev
+  nodemon
 ```
 
 # Api documentation
