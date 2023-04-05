@@ -1,4 +1,54 @@
 # PE - WORLD BACKEND
+Our hiring app API is built using ExpressJS and NodeJS, and is designed to connect Employers with Employees. The app features two distinct user roles - Employees and Employers - and includes key information about each user's experience, skills, and portfolio.
+
+# Database Schema
+![Database Schema](/schema/db_diagram.png)
+
+# ENV Keys
+```bash
+BASE_URL=
+PORT=
+DB_USER=
+DB_HOST=
+DB_NAME=
+DB_PASS=
+DB_PORT=
+JWT_ACCESS_KEY= 
+JWT_REFRESH_KEY= 
+PHOTO_NAME=
+PHOTO_KEY=
+PHOTO_SECRET=
+IMAGE_NAME_PORTO=
+IMAGE_KEY_PORTO=
+IMAGE_SECRET_PORTO=
+EMAIL_NAME=
+EMAIL_PASSWORD=
+```
+
+# Installation
+Clone the project
+
+```bash
+  git clone https://github.com/bayuaria33/backend-peWorld/
+```
+
+Go to the project directory
+
+```bash
+  cd backend-peWorld/
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
 
 # Api documentation
 Employee = Pekerja / Worker
